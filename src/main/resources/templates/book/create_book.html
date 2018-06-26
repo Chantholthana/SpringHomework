@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>craete book</title>
+</head>
+<body>
+    <h1 th:text="${isNew?'Create Book':'Update Book'}">Create Book</h1>
+    <form th:action="${isNew?'/create/submit':'/update/submit'}" method="post" th:object="${book}" enctype="multipart/form-data">
+        ID:<input type="number" th:field="*{id}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:errors="*{id}">Error</span><br>
+        Title: <input type="text" th:field="*{title}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:text="${#fields.errors('title')}">Error</span><br>
+        Author: <input type="text" th:field="*{author}"><br>
+        Publisher: <input type="text" th:field="*{publisher}"><br>
+        thumbnail: <input type="text" th:field="*{thumbnail}" style="width: 200px" hidden>
+        thumbnail:<input type="file" name="file"><br>
+        <input type="submit" value="submit"><br>
+    </form>
+
+</body>
+</html>

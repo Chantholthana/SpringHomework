@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>index</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text text-center bg-success">List All Books</h1>
+        <div class="row">
+            <a class="btn btn-secondary" href="create"><i class="far fa-plus-square">Create New Book</i></a>
+        </div>
+
+        <table  class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col" th:text="#{table.id}">ID</th>
+                <th scope="col" th:text="#{table.title}">ID</th>
+
+                <th scope="col" th:text="#{table.author}">Author</th>
+                <th scope="col" th:text="#{table.publisher}">Publisher</th>
+                <th scope="col" th:text="#{table.thumbnail}">Thumbnail</th>
+                <th scope="col" th:text="#{table.action}">Action</th>
+            </tr>
+            </thead>
+            <tr th:each="book:${books}">
+                <td>[[${book.id}]]</td>
+                <td th:text="${book.getTitle()}"></td>
+                <td th:text="${book.getAuthor()}"></td>
+                <td th:text="${book.getPublisher()}"></td>
+                <td>
+                    <img style="width:100px; height:100px" th:src="${book.getThumbnail()}">
+                </td>
+                <td>
+                    <a class="btn btn-info" th:href="@{/view/{id}(id=${book.getId()})}">View</a>
+                    <a class="btn btn-success" th:href="@{/update/{book_id}(book_id=${book.getId()})}">Update</a>
+                    <a  class="btn-delete btn btn-danger" th:attr="data_id=${book.getId()}"></a>
+
+                </td>
+            </tr>
+
+        </table>
+
+            <Script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></Script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('body').on('click','.btn-delete',function () {
+                        var data_id=($(this).attr("data_id"));
+                        if(confirm("do you delete?...")){
+                            window.location="http://localhost:8080/delete/"+data_id;
+                        }
+                    });
+                });
+            </script>
+
+    </div>
+</body>
+
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</html>
