@@ -15,14 +15,17 @@ public class Book {
     private String publisher;
     private String thumbnail;
 
+    private Category category;
+
     public Book(){}
 
-    public Book(@NotNull Integer id, @Size(min = 5, max = 255) String title, String author, String publisher, String thumbnail) {
+    public Book(@NotNull Integer id, @Size(min = 5, max = 255) String title, String author, String publisher, String thumbnail, Category category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.thumbnail = thumbnail;
+        this.category = category;
     }
 
     public Integer getId() {
@@ -65,6 +68,14 @@ public class Book {
         this.thumbnail = thumbnail;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -73,6 +84,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
+                ", category=" + category +
                 '}';
     }
 }
