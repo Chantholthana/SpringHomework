@@ -40,7 +40,7 @@ public class UploadServiceImp implements UploadService {
 
         filename=UUID.randomUUID()+"."+extension;
         try {
-            Files.copy(file.getInputStream(),Paths.get(SERVER_PATH+folder).getFileName());
+            Files.copy(file.getInputStream(), Paths.get((SERVER_PATH+folder), filename));
         }catch (IOException e){
 
         }

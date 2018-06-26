@@ -62,7 +62,7 @@ public class BookController {
         System.out.println(book);
         String filename=this.uploadService.singleFileUploadFile(file,"class/");
         if (!file.isEmpty()){
-            book.setThumbnail("/images-btb"+filename);
+            book.setThumbnail("/images-btb/"+filename);
         }
 
         this.bookService.update(book);
@@ -87,13 +87,14 @@ public class BookController {
 
 
     @PostMapping("/create/submit")
-    public String create(@Valid Book book, BindingResult bindingResult, MultipartFile file){
-        String filename=this.uploadService.upload(file,"/class/");
-        book.setThumbnail("/images-btb/"+filename);
+    public String create(@Valid Book book, BindingResult bindingResult, MultipartFile file, Model model){
 
         if (bindingResult.hasErrors()){
+            model.addAttribute("isNew",true);
             return "book/create_book";
         }
+        String filename=this.uploadService.singleFileUploadFile(file,"");
+        book.setThumbnail("/images-btb/"+filename);
 
         System.out.println(book);
         this.bookService.create(book);

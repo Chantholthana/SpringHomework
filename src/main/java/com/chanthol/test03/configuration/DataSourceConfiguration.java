@@ -14,7 +14,7 @@ public class DataSourceConfiguration {
         driverManagerDataSource.setDriverClassName("org.postgresql.Driver");
         driverManagerDataSource.setUrl("jdbc:postgresql://localhost:5432/btb_class");
         driverManagerDataSource.setUsername("postgres");
-        driverManagerDataSource.setPassword("root");
+        driverManagerDataSource.setPassword("chanthol");
 
         return driverManagerDataSource;
     }

@@ -10,42 +10,43 @@
     <title>index</title>
 </head>
 <body>
-    <h1>Hello</h1>
+
     <div class="container">
-        <h1 class="text text-center bg-success">List All Books</h1>
-        <div class="row">
-            <a class="btn btn-secondary" href="create"><i class="far fa-plus-square">Create New Book</i></a>
+        <h1 class="text-center text text-danger">List All Books</h1>
+        <div class="row pt-5">
+            <a class="btn btn-success" href="create">Create new book</a>
+
+            <table  class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" th:text="#{table.id}">ID</th>
+                    <th scope="col" th:text="#{table.title}">ID</th>
+
+                    <th scope="col" th:text="#{table.author}">Author</th>
+                    <th scope="col" th:text="#{table.publisher}">Publisher</th>
+                    <th scope="col" th:text="#{table.thumbnail}">Thumbnail</th>
+                    <th scope="col" th:text="#{table.action}">Action</th>
+                </tr>
+                </thead>
+                <tr th:each="book:${books}">
+                    <td>[[${book.id}]]</td>
+                    <td th:text="${book.getTitle()}"></td>
+                    <td th:text="${book.getAuthor()}"></td>
+                    <td th:text="${book.getPublisher()}"></td>
+                    <td>
+                        <img style="width:100px; height:100px" th:src="${book.getThumbnail()}">
+                    </td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/view/{id}(id=${book.getId()})}">view</a>
+                        <a class="btn btn-success" th:href="@{/update/{book_id}(book_id=${book.getId()})}">Update</a>
+                        <a  class="btn-delete btn btn-danger" th:attr="data_id=${book.getId()}">Delete</a>
+
+                    </td>
+                </tr>
+
+            </table>
         </div>
 
-        <table  class="table table-bordered">
-            <thead>
-                <tr>
-                <th scope="col" th:text="#{table.id}">ID</th>
-                <th scope="col" th:text="#{table.title}">ID</th>
-
-                <th scope="col" th:text="#{table.author}">Author</th>
-                <th scope="col" th:text="#{table.publisher}">Publisher</th>
-                <th scope="col" th:text="#{table.thumbnail}">Thumbnail</th>
-                <th scope="col" th:text="#{table.action}">Action</th>
-            </tr>
-            </thead>
-            <tr th:each="book:${books}">
-                <td>[[${book.id}]]</td>
-                <td th:text="${book.getTitle()}"></td>
-                <td th:text="${book.getAuthor()}"></td>
-                <td th:text="${book.getPublisher()}"></td>
-                <td>
-                    <img style="width:100px; height:100px" th:src="${book.getThumbnail()}">
-                </td>
-                <td>
-                    <a class="btn btn-info" th:href="@{/view/{id}(id=${book.getId()})}">View</a>
-                    <a class="btn btn-success" th:href="@{/update/{book_id}(book_id=${book.getId()})}">Update</a>
-                    <a  class="btn-delete btn btn-danger" th:attr="data_id=${book.getId()}"></a>
-
-                </td>
-            </tr>
-
-        </table>
 
             <Script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></Script>
             <script type="text/javascript">

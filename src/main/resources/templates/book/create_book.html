@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>craete book</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>create</title>
 </head>
 <body>
+
+<div class="container">
     <h1 th:text="${isNew?'Create Book':'Update Book'}">Create Book</h1>
-    <form th:action="${isNew?'/create/submit':'/update/submit'}" method="post" th:object="${book}" enctype="multipart/form-data">
-        ID:<input type="number" th:field="*{id}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:errors="*{id}">Error</span><br>
-        Title: <input type="text" th:field="*{title}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:text="${#fields.errors('title')}">Error</span><br>
-        Author: <input type="text" th:field="*{author}"><br>
-        Publisher: <input type="text" th:field="*{publisher}"><br>
-        thumbnail: <input type="text" th:field="*{thumbnail}" style="width: 200px" hidden>
-        thumbnail:<input type="file" name="file"><br>
-        <input type="submit" value="submit"><br>
+    <form class="form-control" th:action="${isNew?'/create/submit':'/update/submit'}" method="post" th:object="${book}" enctype="multipart/form-data">
+       <div class="row">
+            <label>ID</label>
+            <input type="number" th:field="*{id}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:errors="*{id}">Error</span><br>
+       </div>
+        <div class="row">
+           <label>Title</label>
+            <input type="text" th:field="*{title}"><span style="color: red;" th:if="${#fields.hasErrors()}" th:text="${#fields.errors('title')}">Error</span><br>
+        </div>
+        <div class="row">
+            <label>Author:</label>
+             <input type="text" th:field="*{author}"><br>
+        </div>
+        <div class="row">
+            <label>Publisher: </label>
+            <input type="text" th:field="*{publisher}">
+        </div>
+        <div class="row">
+            <label>thumbnail:</label>
+            <input type="text" th:field="*{thumbnail}" style="width: 200px" hidden>
+        </div>
+        <div class="row">
+            <input type="file" name="file"><br>
+            <input type="submit" value="submit">
+        </div>
     </form>
+</div>
 
 </body>
+<!--JavaScript at end of body for optimized loading-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </html>

@@ -2,6 +2,7 @@ package com.chanthol.test03.repository;
 
 import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
 import com.chanthol.test03.models.Book;
+import com.chanthol.test03.repository.provider.BookProvider;
 import com.github.javafaker.Faker;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -11,7 +12,13 @@ import java.util.List;
 
 @Repository
 public interface BookRepositories {
-    @Select("select * from tb_book")
+    @SelectProvider(type = BookProvider.class,method="getAllProvider")
+//    @Select("select * from tb_book order by id desc")
+    @Results({
+            @Result(column = "id",property = "id"),
+            @Result(column = "title",property = "title")
+
+    })
     List<Book> getAll();
 
     @Select("select * from tb_book where id=#{id}")
@@ -20,10 +27,11 @@ public interface BookRepositories {
     @Update("update tb_book set title=#{title}, author=#{author},publisher=#{publisher},thumbnail=#{thumbnail} where id=#{id}")
     boolean update(Book book);
 
-    @Delete("DELETE * FROM tb_book where id=#{id}")
+    @Delete("delete from  tb_book where id=#{id}")
     boolean delete(Integer id);
 
-    @Insert("insert into tb_book(title,author,publisher,thumbnail) values(#{title},#{author},#{author},#{publisher},#{thumbnail} )")
+//    @Insert("insert into tb_book(title,author,publisher,thumbnail) values(#{title},#{author},#{publisher},#{thumbnail})")
+    @InsertProvider(type = BookProvider.class, method = "createProvider")
     boolean create(Book book);
 
 //    Faker faker=new Faker();
